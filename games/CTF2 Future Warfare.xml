@@ -1,0 +1,693 @@
+<?xml version="1.0" ?>
+<!DOCTYPE game SYSTEM "game.dtd">
+
+<!-- 
+	========================================================== 
+	4 Player CAPTURE THE FLAG map compiled by IC for TripleA 
+	==========================================================
+-->
+
+<game>
+
+	<info name="CTF2 Future Warfare" version="1.0"/>
+			
+	<loader javaClass="games.strategy.triplea.TripleA"/>
+	
+	<triplea minimumVersion="1.7"/>
+		<diceSides value="12"/>
+	<map>
+		<!-- Territory Definitions -->
+	    <territory name="ForelianBase"/>
+	    <territory name="CorpiusBase"/>
+	    <territory name="AlderusBase"/>
+	    <territory name="RazlaniBase"/>
+	    <territory name="Flag"/>
+	    <territory name="TopBar"/>
+	    <territory name="BottomBar"/>
+	    <territory name="LeftBar"/>
+	    <territory name="RightBar"/>
+	    <territory name="ForelianStart"/>
+	    <territory name="ForelianStartLeft"/>
+	    <territory name="ForelianStartRight"/>
+	    <territory name="ForelianStepOne"/>
+	    <territory name="ForelianStepTwo"/>
+	    <territory name="CorpiusStart"/>
+	    <territory name="CorpiusStartLeft"/>
+	    <territory name="CorpiusStartRight"/>
+	    <territory name="CorpiusStepOne"/>
+	    <territory name="CorpiusStepTwo"/>
+		
+	    <territory name="AlderusStart"/>
+	    <territory name="AlderusStartLeft"/>
+	    <territory name="AlderusStartRight"/>
+	    <territory name="AlderusStepOne"/>
+	    <territory name="AlderusStepTwo"/>
+		
+	    <territory name="RazlaniStart"/>
+	    <territory name="RazlaniStartLeft"/>
+	    <territory name="RazlaniStartRight"/>
+	    <territory name="RazlaniStepOne"/>
+	    <territory name="RazlaniStepTwo"/>
+	
+
+		
+		
+		<!-- Sea Zone Declarations -->
+				  
+  		<!-- Territory Connections -->  
+		<connection t1="ForelianBase" t2="ForelianStart" />
+		<connection t1="ForelianStart" t2="ForelianStartLeft" />
+		<connection t1="ForelianStart" t2="ForelianStartRight" />
+		<connection t1="ForelianStart" t2="ForelianStepOne" />
+		<connection t1="ForelianStepOne" t2="ForelianStepTwo" />
+
+		<connection t1="CorpiusBase" t2="CorpiusStart" />
+		<connection t1="CorpiusStart" t2="CorpiusStartLeft" />
+		<connection t1="CorpiusStart" t2="CorpiusStartRight" />
+		<connection t1="CorpiusStart" t2="CorpiusStepOne" />
+		<connection t1="CorpiusStepOne" t2="CorpiusStepTwo" />
+
+		<connection t1="AlderusBase" t2="AlderusStart" />
+		<connection t1="AlderusStart" t2="AlderusStartLeft" />
+		<connection t1="AlderusStart" t2="AlderusStartRight" />
+		<connection t1="AlderusStart" t2="AlderusStepOne" />
+		<connection t1="AlderusStepOne" t2="AlderusStepTwo" />
+
+		<connection t1="RazlaniBase" t2="RazlaniStart" />
+		<connection t1="RazlaniStart" t2="RazlaniStartLeft" />
+		<connection t1="RazlaniStart" t2="RazlaniStartRight" />
+		<connection t1="RazlaniStart" t2="RazlaniStepOne" />
+		<connection t1="RazlaniStepOne" t2="RazlaniStepTwo" />
+
+		<!-- Flag (In the Center) -->
+		<connection t1="Flag" t2="ForelianStepTwo" />
+		<connection t1="Flag" t2="CorpiusStepTwo" />
+		<connection t1="Flag" t2="AlderusStepTwo" />
+		<connection t1="Flag" t2="RazlaniStepTwo" />
+		
+		<!-- Bars (Stretched Ovals) -->
+		<connection t1="TopBar" t2="ForelianStartLeft" />
+		<connection t1="TopBar" t2="CorpiusStartRight" />
+		<connection t1="LeftBar" t2="ForelianStartRight" />
+		<connection t1="LeftBar" t2="RazlaniStartLeft" />
+		<connection t1="BottomBar" t2="RazlaniStartRight" />
+		<connection t1="BottomBar" t2="AlderusStartLeft" />
+		<connection t1="RightBar" t2="CorpiusStartLeft" />
+		<connection t1="RightBar" t2="AlderusStartRight" />
+
+		<!-- Flag connections -->
+		<connection t1="Flag" t2="ForelianStepTwo" />
+		<connection t1="Flag" t2="CorpiusStepTwo" />
+		<connection t1="Flag" t2="AlderusStepTwo" />
+		<connection t1="Flag" t2="RazlaniStepTwo" />
+	</map>
+	
+	<resourceList>
+		<resource name="PUs"/>
+	</resourceList>
+
+
+	
+	<playerList>
+
+
+		<!-- In turn order -->
+		<player name="Forelian_Republic" optional="false"/>
+		<player name="Corpius_Federation" optional="false"/>
+		<player name="Alderus_Confederacy" optional="false"/>
+		<player name="Razlani_Dominion" optional="false"/>
+		
+
+	</playerList>
+	
+	<unitList>
+		<unit name="Biological_Infantry"/>
+		<unit name="Robotic_Infantry"/>
+		<unit name="Assault_Mech"/>
+		<unit name="Interceptor"/>
+		<unit name="Destroyer"/>
+		<unit name="Battlecruiser"/>
+		<unit name="Transport"/>
+		<unit name="Defense_Turret"/>
+		<unit name="Spaceport"/>
+
+	</unitList>
+
+	<gamePlay>
+		<delegate name="initDelegate" javaClass="games.strategy.triplea.delegate.InitializationDelegate" display="Initializing Delegates"/>
+		<delegate name="tech" javaClass="games.strategy.triplea.delegate.TechnologyDelegate" display="Research Technology"/> 
+		<delegate name="battle" javaClass="games.strategy.triplea.delegate.BattleDelegate" display="Combat"/>
+		<delegate name="move" javaClass="games.strategy.triplea.delegate.MoveDelegate" display="Combat Move"/>
+		<delegate name="place" javaClass="games.strategy.triplea.delegate.PlaceDelegate" display="Place Units"/>
+		<delegate name="purchase" javaClass="games.strategy.triplea.delegate.PurchaseDelegate" display="Purchase Units"/>
+		<delegate name="endTurn" javaClass="games.strategy.triplea.delegate.EndTurnDelegate" display="Turn Complete"/>
+		<delegate name="endRound" javaClass="games.strategy.triplea.delegate.EndRoundDelegate" display="Round Complete"/>
+
+		<delegate name="placeBid" javaClass="games.strategy.triplea.delegate.BidPlaceDelegate" display="Bid Placement"/>
+		<delegate name="bid" javaClass="games.strategy.triplea.delegate.BidPurchaseDelegate" display="Bid Purchase"/>
+		
+		
+		<sequence>
+
+			<step name="gameInitDelegate" delegate="initDelegate" maxRunCount="1"/>
+			
+
+			<step name="Forelian_RepublicBid" delegate="bid" player="Forelian_Republic" maxRunCount="1"/>
+			<step name="Forelian_RepublicBidPlace" delegate="placeBid" player="Forelian_Republic" maxRunCount="1"/>
+
+			<step name="Corpius_FederationBid" delegate="bid" player="Corpius_Federation" maxRunCount="1"/>
+			<step name="Corpius_FederationBidPlace" delegate="placeBid" player="Corpius_Federation" maxRunCount="1"/>
+
+			<step name="Alderus_ConfederacyBid" delegate="bid" player="Alderus_Confederacy" maxRunCount="1"/>
+			<step name="Alderus_ConfederacyBidPlace" delegate="placeBid" player="Alderus_Confederacy" maxRunCount="1"/>
+			
+			<step name="Razlani_DominionBid" delegate="bid" player="Razlani_Dominion" maxRunCount="1"/>
+			<step name="Razlani_DominionBidPlace" delegate="placeBid" player="Razlani_Dominion" maxRunCount="1"/>
+
+
+			<!-- Forelian_Republics Game Sequence -->
+			<step name="Forelian_RepublicPurchase" delegate="purchase" player="Forelian_Republic"/>
+			<step name="Forelian_RepublicCombatMove" delegate="move" player="Forelian_Republic"/>
+			<step name="Forelian_RepublicBattle" delegate="battle" player="Forelian_Republic"/>
+			<step name="Forelian_RepublicNonCombatMove" delegate="move" player="Forelian_Republic" display="Non Combat Move"/>
+			<step name="Forelian_RepublicPlace" delegate="place" player="Forelian_Republic"/>
+			<step name="Forelian_RepublicEndTurn" delegate="endTurn" player="Forelian_Republic"/>
+
+			<!-- <step name="Corpius_FederationTech" delegate="tech" player="British"/> -->
+			<step name="Corpius_FederationPurchase" delegate="purchase" player="Corpius_Federation"/>
+			<step name="Corpius_FederationCombatMove" delegate="move" player="Corpius_Federation"/>
+			<step name="Corpius_FederationBattle" delegate="battle" player="Corpius_Federation"/>
+			<step name="Corpius_FederationNonCombatMove" delegate="move" player="Corpius_Federation" display="Non Combat Move"/>
+			<step name="Corpius_FederationPlace" delegate="place" player="Corpius_Federation"/>
+			<step name="Corpius_FederationEndTurn" delegate="endTurn" player="Corpius_Federation"/>
+
+			<!--<step name="Alderus_ConfederacyTech" delegate="tech" player="Alderus_Confederacy"/>-->
+			<step name="Alderus_ConfederacyPurchase" delegate="purchase" player="Alderus_Confederacy"/>
+			<step name="Alderus_ConfederacyCombatMove" delegate="move" player="Alderus_Confederacy"/>
+			<step name="Alderus_ConfederacyBattle" delegate="battle" player="Alderus_Confederacy"/>
+			<step name="Alderus_ConfederacyNonCombatMove" delegate="move" player="Alderus_Confederacy" display="Non Combat Move"/>
+			<step name="Alderus_ConfederacyPlace" delegate="place" player="Alderus_Confederacy"/>
+			<step name="Alderus_ConfederacyEndTurn" delegate="endTurn" player="Alderus_Confederacy"/>
+
+			<!-- <step name="Razlani_DominionTech" delegate="tech" player="Alderus_Confederacy"/> -->
+			<step name="Razlani_DominionPurchase" delegate="purchase" player="Razlani_Dominion"/>
+			<step name="Razlani_DominionCombatMove" delegate="move" player="Razlani_Dominion"/>
+			<step name="Razlani_DominionBattle" delegate="battle" player="Razlani_Dominion"/>
+			<step name="Razlani_DominionNonCombatMove" delegate="move" player="Razlani_Dominion" display="Non Combat Move"/>
+			<step name="Razlani_DominionPlace" delegate="place" player="Razlani_Dominion"/>
+			<step name="Razlani_DominionEndTurn" delegate="endTurn" player="Razlani_Dominion"/>
+			
+			<step name="endRoundStep" delegate="endRound"/>
+		</sequence>
+	</gamePlay>
+
+	<production>
+		<productionRule name="buyBiologicalInfantry">
+			<cost resource="PUs" quantity="25" />
+			<result resourceOrUnit="Biological_Infantry" quantity="1"/>
+		</productionRule>
+		<productionRule name="buyRoboticInfantry">
+			<cost resource="PUs" quantity="35" />
+			<result resourceOrUnit="Robotic_Infantry" quantity="1"/>
+		</productionRule>
+		<productionRule name="buyAssaultMech">
+			<cost resource="PUs" quantity="80" />
+			<result resourceOrUnit="Assault_Mech" quantity="1"/>
+		</productionRule>
+		<productionRule name="buyInterceptor">
+			<cost resource="PUs" quantity="45" />
+			<result resourceOrUnit="Interceptor" quantity="1"/>
+		</productionRule>
+		<productionRule name="buyTransport">
+			<cost resource="PUs" quantity="50" />
+			<result resourceOrUnit="Transport" quantity="1"/>
+		</productionRule>
+		<productionRule name="buyDestroyer">
+			<cost resource="PUs" quantity="70" />
+			<result resourceOrUnit="Destroyer" quantity="1"/>
+		</productionRule>
+		<productionRule name="buyBattlecruiser">
+			<cost resource="PUs" quantity="120" />
+			<result resourceOrUnit="Battlecruiser" quantity="1"/>
+		</productionRule>
+		<productionRule name="buyDefenseTurret">
+			<cost resource="PUs" quantity="30" />
+			<result resourceOrUnit="Defense_Turret" quantity="1"/>
+		</productionRule>
+
+
+		<!-- advanced industrial production -->
+
+		<productionFrontier name="production">
+			<frontierRules name="buyBiologicalInfantry"/>
+			<frontierRules name="buyRoboticInfantry"/>
+			<frontierRules name="buyAssaultMech"/>
+			<frontierRules name="buyInterceptor"/>
+			<frontierRules name="buyTransport"/>
+			<frontierRules name="buyDestroyer"/>
+			<frontierRules name="buyBattlecruiser"/>
+			<frontierRules name="buyDefenseTurret"/>
+		</productionFrontier>
+
+		
+
+		<playerProduction player="Forelian_Republic" frontier="production"/>
+		<playerProduction player="Corpius_Federation" frontier="production"/>
+		<playerProduction player="Alderus_Confederacy" frontier="production"/>
+		<playerProduction player="Razlani_Dominion" frontier="production"/>
+
+
+	</production> 
+	
+	<attachmentList>
+				<!-- Tech Attatchements here for compatibility reasons with .5.1 -->
+
+                <!-- Forelian_Republics -->
+                <attachment name="techAttachment" attachTo="Forelian_Republic" javaClass="games.strategy.triplea.attachments.TechAttachment" type="player">
+                        <option name="heavyBomber" value="false"/>
+                        <option name="jetPower" value="false"/>
+                        <option name="industrialTechnology" value="false"/>
+                        <option name="superSub" value="false"/>
+                        <option name="rocket" value="false"/>
+                        <option name="longRangeAir" value="false"/>
+                        <option name="paratroopers" value="true"/>
+                </attachment>
+
+                <!-- Corpius_Federations -->
+                <attachment name="techAttachment" attachTo="Corpius_Federation" javaClass="games.strategy.triplea.attachments.TechAttachment" type="player">
+                        <option name="heavyBomber" value="false"/>
+                        <option name="jetPower" value="false"/>
+                        <option name="industrialTechnology" value="false"/>
+                        <option name="superSub" value="false"/>
+                        <option name="rocket" value="false"/>
+                        <option name="longRangeAir" value="false"/>
+                        <option name="paratroopers" value="true"/>
+                </attachment>
+
+                <!-- Alderus_Confederacys -->
+                <attachment name="techAttachment" attachTo="Alderus_Confederacy" javaClass="games.strategy.triplea.attachments.TechAttachment" type="player">
+                        <option name="heavyBomber" value="false"/>
+                        <option name="jetPower" value="false"/>
+                        <option name="industrialTechnology" value="false"/>
+                        <option name="superSub" value="false"/>
+                        <option name="rocket" value="false"/>
+                        <option name="longRangeAir" value="false"/>
+                        <option name="paratroopers" value="true"/>
+                </attachment>
+
+                <!-- Razlani_Dominion -->
+                <attachment name="techAttachment" attachTo="Razlani_Dominion" javaClass="games.strategy.triplea.attachments.TechAttachment" type="player">
+                        <option name="heavyBomber" value="false"/>
+                        <option name="jetPower" value="false"/>
+                        <option name="industrialTechnology" value="false"/>
+                        <option name="superSub" value="false"/>
+                        <option name="rocket" value="false"/>
+                        <option name="longRangeAir" value="false"/>
+                        <option name="paratroopers" value="true"/>
+                </attachment>
+
+
+	    <attachment name="unitAttachment" 
+			 attachTo="Biological_Infantry"
+			 javaClass="games.strategy.triplea.attachments.UnitAttachment"
+			 type="unitType">
+			 <option name="movement" value="1"/>
+                         <option name="isAirTransportable" value="true"/>
+			 <option name="transportCost" value="2"/>
+			 <option name="attack" value="2"/>
+			 <option name="defense" value="3"/>
+	    </attachment>
+	    <attachment name="unitAttachment" 
+			 attachTo="Robotic_Infantry"
+			 javaClass="games.strategy.triplea.attachments.UnitAttachment"
+			 type="unitType">
+			 <option name="movement" value="1"/>
+                         <option name="isAirTransportable" value="true"/>
+			 <option name="transportCost" value="3"/>
+			 <option name="attack" value="5"/>
+			 <option name="defense" value="5"/>
+	    </attachment>
+	    <attachment name="unitAttachment" 
+			 attachTo="Assault_Mech"
+			 javaClass="games.strategy.triplea.attachments.UnitAttachment"
+			 type="unitType">
+			 <option name="movement" value="1"/>
+                         <option name="isAirTransportable" value="true"/>
+			 <option name="transportCost" value="6"/>
+			 <option name="isTwoHit" value="true"/>
+	
+			 <option name="attack" value="8"/>
+			 <option name="defense" value="6"/>
+	    </attachment>
+	    <attachment name="unitAttachment" 
+			 attachTo="Interceptor"
+			 javaClass="games.strategy.triplea.attachments.UnitAttachment"
+			 type="unitType">
+			 <option name="movement" value="4"/>
+			 <option name="carrierCost" value="1"/>
+			 <option name="isAir" value="true"/>   
+			 <option name="attack" value="6"/>
+			 <option name="defense" value="5"/>
+	    </attachment>
+	    <attachment name="unitAttachment" 
+			 attachTo="Destroyer"
+			 javaClass="games.strategy.triplea.attachments.UnitAttachment"
+			 type="unitType">
+			 <option name="movement" value="6"/>
+			 <option name="carrierCost" value="1"/>
+			 <option name="isAir" value="true"/>   
+			 <option name="attack" value="9"/>
+			 <option name="defense" value="8"/>
+	    </attachment>
+	    <attachment name="unitAttachment" 
+			 attachTo="Battlecruiser"
+			 javaClass="games.strategy.triplea.attachments.UnitAttachment"
+			 type="unitType">
+			 <option name="movement" value="6"/>
+			 <option name="carrierCost" value="1"/>
+			 <option name="isAir" value="true"/>   
+			 <option name="isTwoHit" value="true"/>
+	
+			 <option name="attack" value="11"/>
+			 <option name="defense" value="10"/>
+	    </attachment>
+	    <attachment name="unitAttachment" 
+			 attachTo="Transport"
+			 javaClass="games.strategy.triplea.attachments.UnitAttachment"
+			 type="unitType">
+			 <option name="movement" value="6"/>
+			 <option name="isAir" value="true"/>   
+			 <option name="isAirTransport" value="true"/>   
+			 <option name="transportCapacity" value="12"/>   
+			 <option name="attack" value="0"/>
+			 <option name="defense" value="0"/>
+	    </attachment>
+	    <attachment name="unitAttachment" 
+			 attachTo="Spaceport"
+			 javaClass="games.strategy.triplea.attachments.UnitAttachment"
+			 type="unitType">
+			 <option name="isFactory" value="true"/>   
+	    </attachment>
+	    <attachment name="unitAttachment" 
+			 attachTo="Defense_Turret"
+			 javaClass="games.strategy.triplea.attachments.UnitAttachment"
+			 type="unitType">
+                         <option name="attackAA" value="6"/>
+                         <option name="maxAAattacks" value="1"/>
+                         <option name="mayOverStackAA" value="true"/>
+                         <option name="isAAforCombatOnly" value="true"/>
+                         <option name="isAAforBombingThisUnitOnly" value="true"/>
+                         <option name="isAAforFlyOverOnly" value="true"/>
+			 <option name="isConstruction" value="true"/>   
+                         <option name="constructionType" value="Turret"/>
+                         <option name="constructionsPerTerrPerTypePerTurn" value="2"/>
+                         <option name="maxConstructionsPerTypePerTerr" value="9999"/>
+                         <option name="typeAA" value="aaGun"/>
+			 <option name="targetsAA" value="Interceptor:Destroyer:Transport:Battlecruiser"/>
+			 <option name="attack" value="0"/>
+			 <option name="defense" value="6"/>
+			 <option name="movement" value="0"/>
+
+	    </attachment>
+
+
+		<!-- Army Bases IC -->
+		<attachment name="territoryAttachment" attachTo="ForelianBase" javaClass="games.strategy.triplea.attachments.TerritoryAttachment"  type="territory">
+                        <option name="production" value="150"/>
+						<option name="originalFactory" value="true" />
+                        <option name="capital" value="Forelian_Republic"/>        
+        </attachment>
+		<attachment name="territoryAttachment" attachTo="CorpiusBase" javaClass="games.strategy.triplea.attachments.TerritoryAttachment"  type="territory">
+                        <option name="production" value="150"/>
+						<option name="originalFactory" value="true" />
+                        <option name="capital" value="Corpius_Federation"/>        
+        </attachment>
+		<attachment name="territoryAttachment" attachTo="AlderusBase" javaClass="games.strategy.triplea.attachments.TerritoryAttachment"  type="territory">
+                        <option name="production" value="150"/>
+						<option name="originalFactory" value="true" />
+                        <option name="capital" value="Alderus_Confederacy"/>        
+        </attachment>
+		<attachment name="territoryAttachment" attachTo="RazlaniBase" javaClass="games.strategy.triplea.attachments.TerritoryAttachment"  type="territory">
+                        <option name="production" value="150"/>
+						<option name="originalFactory" value="true" />
+                        <option name="capital" value="Razlani_Dominion"/>        
+        </attachment>
+
+		<!-- Flag -->
+	    <attachment name="territoryAttachment"  attachTo="Flag" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="250" />
+	    </attachment>
+
+		<!-- Bar Territories -->		
+	    <attachment name="territoryAttachment"  attachTo="TopBar" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="LeftBar" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="BottomBar" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="RightBar" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	   
+		<!-- Forelian Territories -->
+	    <attachment name="territoryAttachment"  attachTo="ForelianStart" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="ForelianStartRight" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="ForelianStartLeft" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="ForelianStepOne" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="ForelianStepTwo" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+
+		<!-- Corpius Territories -->
+	    <attachment name="territoryAttachment"  attachTo="CorpiusStart" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="CorpiusStartRight" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="CorpiusStartLeft" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="CorpiusStepOne" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="CorpiusStepTwo" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+
+		<!-- Alderus Territories -->
+	    <attachment name="territoryAttachment"  attachTo="AlderusStart" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="AlderusStartRight" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="AlderusStartLeft" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="AlderusStepOne" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="AlderusStepTwo" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+
+		<!-- Razlani Territories -->
+	    <attachment name="territoryAttachment"  attachTo="RazlaniStart" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="RazlaniStartRight" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="RazlaniStartLeft" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="RazlaniStepOne" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+	    <attachment name="territoryAttachment"  attachTo="RazlaniStepTwo" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory" >
+		    <option name="production" value="30" />
+	    </attachment>
+
+
+
+
+
+
+	
+	</attachmentList>
+	
+	<initialize>
+		<ownerInitialize>
+		  
+		  
+			<!-- Forelian_Republic Owned Territories -->
+			<territoryOwner territory="ForelianBase" owner = "Forelian_Republic" /> 
+			<territoryOwner territory="ForelianStart" owner = "Forelian_Republic" />		  
+
+			<!-- Corpius_Federation Owned Territories -->
+			<territoryOwner territory="CorpiusBase" owner = "Corpius_Federation" />
+			<territoryOwner territory="CorpiusStart" owner = "Corpius_Federation" />		  
+		  	<!-- Alderus_Confederacy Owned Territories -->
+		    <territoryOwner territory="AlderusBase" owner = "Alderus_Confederacy" />
+			<territoryOwner territory="AlderusStart" owner = "Alderus_Confederacy" />		  
+			<!-- Razlani_Dominion Owned Territories -->
+			<territoryOwner territory="RazlaniBase" owner = "Razlani_Dominion" />
+			<territoryOwner territory="RazlaniStart" owner = "Razlani_Dominion" />		  
+			
+		</ownerInitialize>
+
+		<unitInitialize>
+
+			<!-- Neutral Starting Units -->
+			<unitPlacement unitType="Biological_Infantry" territory="Flag" quantity ="10"  /> 
+
+			<!-- Forelian Starting Units (15 IPC) -->
+			<unitPlacement unitType="Spaceport" territory="ForelianBase" quantity ="1" owner="Forelian_Republic" /> 
+			<unitPlacement unitType="Interceptor" territory="ForelianBase" quantity ="1" owner="Forelian_Republic" />
+			<unitPlacement unitType="Defense_Turret" territory="ForelianBase" quantity ="1" owner="Forelian_Republic" />
+			<unitPlacement unitType="Biological_Infantry" territory="ForelianStart" quantity ="3" owner="Forelian_Republic" />
+
+			<!-- Corpius Starting Units (20 IPC) -->
+			<unitPlacement unitType="Spaceport" territory="CorpiusBase" quantity ="1" owner="Corpius_Federation" /> 
+			<unitPlacement unitType="Interceptor" territory="CorpiusBase" quantity ="1" owner="Corpius_Federation" />
+			<unitPlacement unitType="Defense_Turret" territory="CorpiusBase" quantity ="1" owner="Corpius_Federation" />
+			<unitPlacement unitType="Biological_Infantry" territory="CorpiusStart" quantity ="3" owner="Corpius_Federation" />
+
+			<!-- Alderus Starting Units (25 IPC) -->
+			<unitPlacement unitType="Spaceport" territory="AlderusBase" quantity ="1" owner="Alderus_Confederacy" /> 
+			<unitPlacement unitType="Interceptor" territory="AlderusBase" quantity ="1" owner="Alderus_Confederacy" />
+			<unitPlacement unitType="Defense_Turret" territory="AlderusBase" quantity ="1" owner="Alderus_Confederacy" />
+			<unitPlacement unitType="Biological_Infantry" territory="AlderusStart" quantity ="3" owner="Alderus_Confederacy" />
+			
+			<!-- Razlani Starting Units (30 IPC) -->
+			<unitPlacement unitType="Spaceport" territory="RazlaniBase" quantity ="1" owner="Razlani_Dominion" /> 
+			<unitPlacement unitType="Interceptor" territory="RazlaniBase" quantity ="1" owner="Razlani_Dominion" />
+			<unitPlacement unitType="Defense_Turret" territory="RazlaniBase" quantity ="1" owner="Razlani_Dominion" />
+			<unitPlacement unitType="Biological_Infantry" territory="RazlaniStart" quantity ="3" owner="Razlani_Dominion" />
+
+			
+		</unitInitialize>
+	
+		<resourceInitialize>
+			<resourceGiven player="Forelian_Republic" resource="PUs" quantity="180"/>
+			<resourceGiven player="Corpius_Federation" resource="PUs" quantity="210"/>
+			<resourceGiven player="Alderus_Confederacy" resource="PUs" quantity="240"/>
+			<resourceGiven player="Razlani_Dominion" resource="PUs" quantity="270"/>
+		</resourceInitialize>
+	</initialize>
+
+	<propertyList>
+		<property name="Forelian_Republic bid" value="0" editable="true">
+			<number min="0" max="1000"/>
+		</property>
+		<property name="Corpius_Federation bid" value="0" editable="true">
+			<number min="0" max="1000"/>
+		</property>
+
+		<property name="Alderus_Confederacy bid" value="0" editable="true">
+			<number min="0" max="1000"/>
+		</property>
+
+		<property name="Razlani_Dominion bid" value="0" editable="true">
+			<number min="0" max="1000"/>
+		</property>
+
+		<property name="Low Luck" value="false" editable="true">
+				<boolean/>
+		</property>
+
+		<property name="Low Luck for AntiAircraft" value="false" editable="true">
+				<boolean/>
+		</property>
+
+		<property name="Low Luck for Technology" value="false" editable="false">
+				<boolean/>
+		</property>
+
+		<property name="Low Luck for Bombing and Territory Damage" value="false" editable="false">
+				<boolean/>
+		</property>
+	
+	    <!-- Use WW2V3 Rules -->
+        <property name="WW2V3" value="true" editable="false">
+	        <boolean/>
+        </property>
+		<property name="Use Destroyers and Artillery" value="false" editable="false">
+			<boolean/>
+		</property>
+		<property name="Two hit Battlecruiser" value="false" editable="false">
+			<boolean/>
+		</property>
+		<property name="Produce Interceptors on carriers" value="false" editable="false">
+			<boolean/>
+		</property>
+		<property name="Submersible Subs" value="false" editable="false">
+			<boolean/>
+		</property>
+		<property name="Always on AA" value="true" editable="false">
+			<boolean/>
+		</property>
+		<property name="Battleships repair at end of round" value="true" editable="false">
+			<boolean/>
+		</property>
+                <property name="Battleships repair at beginning of round" value="true" editable="false">
+                        <boolean/>
+                </property>
+		<property name="neutralCharge" value="0"/>
+
+		<property name="maxFactoriesPerTerritory" value="1"/>
+                
+		<property name="Allied Air Dependents" value="true" editable="false">
+        	<boolean/>
+		</property>
+                <property name="Paratroopers Can Move During Non Combat" value="true" editable="false">
+			<boolean/>
+		</property>
+		<property name="Paratroopers Can Attack Deep Into Enemy Territory" value="true" editable="true">
+			<boolean/>
+		</property>
+                <property name="Roll AA Individually" value="true" editable="false">
+                        <boolean/>
+                </property>
+                <property name="AA Territory Restricted" value="false" editable="false">
+                        <boolean/>
+                </property>
+                <property name="Multiple AA Per Territory" value="true" editable="false">
+                        <boolean/>
+                </property>
+                <property name="Choose AA Casualties" value="true" editable="false">
+                        <boolean/>
+                </property>
+
+		<property name="mapName" value="CTF2" editable="false"/>
+		
+		<property name="notes">
+                        <value>
+                        <![CDATA[  
+<b>Overview</b><br>Future Warfare is a CTF2 scenario that focuses heavily on air combat. This scenario is not recommended for inexperienced players and does not play well with AI as they do not anticipate human player troop landings from transports and are unable to use transports themselves. They also do not purchase Defense Turrets under any circumstances, making player-controlled transport drops even more effective. This scenario is a free-for-all and all players have the same unit list. Play order starts with the Forelian_Republic (Top left) and continues clockwise. Players later in the turn order have more starting PUs as compensation (+30 for each successive player).<br><br>
+		
+<b>Unit List:</b> All units roll at a D12.<br><br>
+<u>Unit (Cost) Attack/Defense/Movement...Specials</u><br>Biological Infantry (25) 2/3/1<br>Robotic Infantry (35) 5/5/1<br>Assault Mech (80) 8/6/1...Has two Hit-Points.<br>Interceptor (45) 6/5/4...Air Unit.<br>Transport (50) 0/0/6...Air Unit, transports 6 Bio Infantry, 4 Robo Infantry or 2 Mechs.<br>Destroyer (70) 9/8/6...Air Unit<br>Battlecruiser (120) 11/10/6...Air Unit, has two Hit-Points.<br>Defense Turret (30) 0/6/0...Can be placed anywhere, 2 per territory per turn. Each defense turret in a territory fires once at air units flying over or attacking its space at a 6. These AA rolls* occur before regular combat rolls and the number of rolls is independent of the number of air units entering the space, being limited only by the number of Defense Turrets. Also fires at 6 during combat like a regular unit, and can be taken as a casualty as normal.<br><br>
+
+*Casualties from AA Rolls are selected by the attacker as with normal casualties, but will kill even the two hit-point battlecruisers with one shot. Be sure to escort your Battlecruisers with cheaper air units and utilize their damage absorption for the main combat!<br><br>
+
+<b>Important Note on Transports:</b> Transports can only drop off troops into enemy territory during the combat phase, and likewise can only drop off troops into friendly territory during the noncombat phase. Do not load too many transports at once as this will cause the game to lag tremendously. Try to load a maximum of 5 transports at a time. The game may also not optimize transport space if you do not load them individually. Remember that each transport can load 6 Bio Infantry, 4 Robo Infantry or 2 Mechs.<br><br>
+
+<b>Credits:</b> CTF2 is a modification of Capture the Flag. <br>CTF2 created by: Kalar<br>Original Capture The Flag map created by: Puff the Magic Dragon<br>Unit art from 2650 AD (?) and edited by Kalar					]]>
+                        </value>
+                </property>
+	</propertyList>
+	
+</game>

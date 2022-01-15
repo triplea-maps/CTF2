@@ -1,0 +1,13 @@
+map_name: CTF2
+games:
+- game_name: CTF2 Colors
+  file_name: CTF2 Colors.xml
+- game_name: CTF2 Future Warfare
+  file_name: CTF2 Future Warfare.xml
+- game_name: CTF2 Good Versus Evil
+  file_name: CTF2 Good Versus Evil.xml
+- game_name: CTF2 Medieval
+  file_name: CTF2 Medieval.xml
+- game_name: CTF2 WW2
+  file_name: CTF2 WW2.xml
+version: 0
